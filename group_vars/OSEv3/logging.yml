@@ -1,0 +1,20 @@
+# Logging deployment
+#
+# Currently logging deployment is disabled by default, enable it by setting this
+openshift_logging_install_logging: true
+
+openshift_logging_es_pvc_dynamic: true
+openshift_logging_es_pvc_size: 10Gi
+openshift_logging_es_pvc_storage_class_name: "emptyDir"
+
+# Configure the number of elastic search nodes, unless you're using dynamic provisioning
+# this value must be 1
+openshift_logging_es_cluster_size: 1
+
+# Node Selector
+openshift_logging_es_nodeselector: {"node-role.kubernetes.io/infra":"true"}
+openshift_logging_kibana_nodeselector: {"node-role.kubernetes.io/infra":"true"}
+openshift_logging_curator_nodeselector: {"node-role.kubernetes.io/infra": "true"}
+# CPU & Memory
+#openshift_logging_es_cpu_request: 1000m
+#openshift_logging_es_memory_limit: 4Gi

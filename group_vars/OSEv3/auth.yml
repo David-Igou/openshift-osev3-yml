@@ -1,0 +1,24 @@
+# HTPassword, LDAP Auth
+openshift_master_htpasswd_users: {'Cluster-Reader': '$apr1$Nkfg;fdssafSADGDSA','Cluster-Admin': '$apr1$PJ/jOAFJGDSAOFODSF'}
+
+openshift_master_identity_providers:
+ - name: 'htpasswd_auth'
+   login: 'true'
+   challenge: 'true'
+   kind: 'HTPasswdPasswordIdentityProvider'
+ - name: 'LDAP Login'
+   login: 'true'
+   challenge: 'true'
+   kind: 'LDAPPasswordIdentityProvider'
+   attributes:
+     id: ['dn']
+     email: ['mail']
+     name: ['cn']
+     preferredUsername: ['sAMAccountName']
+   bindDN: "CN=openshiftbind,OU=Openshift,OU=Devops,DC=myorg,DC=net"
+   bindPassword: "really-good-password"
+   url: 'ldaps://myorg.net:636/DC=myorg,DC=net?sAMAccountName?sub?(&(memberOf=cn=IT-AUTOMATION-TEAM-WITH-LONGISH-NAME,ou=Ldap%20Groups,ou=Micro%20Management,dc=myorg,dc=net))'
+   insecure: false
+
+# LDAPS Auth
+#openshift_master_ldap_ca_file: m

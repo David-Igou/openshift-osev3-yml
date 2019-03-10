@@ -1,0 +1,24 @@
+# This variable specifies the size of the per host subnet allocated for pod
+# IPs by OpenShift Container Platform SDN. Defaults to 9 which means that
+# a subnet of size /23 is allocated to each host; for example, given the
+# default 10.128.0.0/14 cluster network, this will allocate 10.128.0.0/23,
+# 10.128.2.0/23, 10.128.4.0/23, and so on. This cannot be re-configured
+# after deployment.
+osm_host_subnet_length: 9
+
+#
+# Configure SDN MTU size. This value must be 50 less than the transport MTU for
+# SDN overhead and another 62 less for IPSec overhead.
+openshift_node_sdn_mtu: 1450
+
+#
+# This variable configures which OpenShift Origin SDN plug-in to use for
+# the pod network, which defaults to redhat/openshift-ovs-subnet for the
+# standard SDN plug-in. Set the variable to redhat/openshift-ovs-multitenant
+# to use the multitenant plug-in.
+os_sdn_network_plugin_name: redhat/openshift-ovs-networkpolicy
+openshift_http_proxy: http://my.corp.proxy:3333
+openshift_https_proxy: http://my.corp.proxy:3333
+openshift_no_proxy: my-satellite-server.corp.com,.cluster.local,.svc,localhost,127.0.0.1
+openshift_generate_no_proxy_hosts: True
+

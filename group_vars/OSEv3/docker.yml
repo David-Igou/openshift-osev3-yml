@@ -1,0 +1,15 @@
+# Set docker options to disable signature verification:
+# https://access.redhat.com/solutions/2931991
+# https://bugzilla.redhat.com/show_bug.cgi?id=1403908
+#openshift_docker_options: --selinux-enabled --signature-verification=false
+
+# Make the nexus repository available for pulling images.
+openshift_docker_additional_registries:
+- docker-registry.default.svc:5000
+#- "{{ openshift_hosted_registry_hostname }}"
+
+# Block pulling images from docker.io.
+# Do not block registry.access.redhat.com as this will prevent using images
+# tagged images, even if they are in the node's docker cache.
+openshift_docker_blocked_registries:
+- docker.io

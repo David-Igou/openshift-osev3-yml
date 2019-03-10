@@ -1,0 +1,3 @@
+oreg_url: registry.redhat.io/openshift3/ose-${component}:${version}
+oreg_auth_user: my-redhat-registry-account  
+oreg_auth_password: my-redhat-password

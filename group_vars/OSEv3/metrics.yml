@@ -1,0 +1,24 @@
+# Metrics deployment
+# See: https://docs.openshift.com/enterprise/latest/install_config/cluster_metrics.html
+
+# By default metrics is not automatically deployed, set this to "true" to enable it
+openshift_metrics_install_metrics: False 
+
+# namespace where the components will be deployed
+openshift_metrics_project: openshift-metrics
+
+# Storage Options
+# If openshift_metrics_storage_kind is unset then metrics will be stored
+# in an EmptyDir volume and will be deleted when the cassandra pod terminates.
+openshift_metrics_cassandra_storage_type: emptydir
+
+# Image Repository and Version
+openshift_metrics_image_version: v3.11
+
+# Memory & CPU Limits
+openshift_metrics_hawkular_replicas: 1
+openshift_metrics_cassandra_replicas: 1
+
+# Time Frames
+openshift_metrics_duration: 7
+openshift_metrics_resolution: 30s

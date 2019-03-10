@@ -1,0 +1,29 @@
+#
+# Default project request template with resource limits.
+#
+#osm_project_request_template: "default/project-request"
+
+default_project_limitrange_spec:
+  limits:
+  - max:
+      cpu: 500m
+      memory: 1Gi
+    min:
+      cpu: 50m
+      memory: 4Mi
+    type: Pod
+  - default:
+      cpu: 500m
+      memory: 1Gi
+    defaultRequest:
+      cpu: 50m
+      memory: 1Gi
+    max:
+      cpu: 500m
+      memory: 1Gi
+    maxLimitRequestRatio:
+      cpu: "10"
+    min:
+      cpu: 50m
+      memory: 4Mi
+    type: Container

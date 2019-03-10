@@ -1,0 +1,35 @@
+# Native high availability cluster method with load balancer.
+# The hostnames used for the cluster is configured with the variables
+#
+# * openshift_master_cluster_public_hostname
+# * openshift_master_cluster_hostname
+#
+# Both of these values are define in the hosts file. Both names resolve to the
+# load balancer, but openshift presents different SSL certificates for each. The
+# public hostname presents a certificate signed by a public CA while the other
+# presents a certificate signed by the OpenShift internal CA.
+
+# Use standard https port tcp 443
+openshift_master_api_port: 8443
+openshift_master_console_port: 8443
+
+# Overwrite existing named certificates configuration if it differs from what is provided above.
+openshift_master_overwrite_named_certificates: true
+
+# Certificates and keys are kept externally from the playbooks as security
+# sensitive information should not be checked into version control. These files
+# must exist prior to running the configuration playbook.
+openshift_master_named_certificates: [{"certfile": "{{inventory_dir}}/path/to/certs.pem", "keyfile": "{{inventory_dir}}/path/to/certs.pem", "names": ["{{openshift_master_cluster_public_hostname}}"], "cafile": "{{inventory_dir}}/path/to/ca.pem"}]
+
+# Specify TLS v1.2 ciphers for communication to masters
+openshift_master_min_tls_version: VersionTLS12
+
+# Determines whether to install the web console
+openshift_web_console_install: true
+
+# The version for the component images
+openshift_web_console_version: v3.11
+
+# Enable Glusterfs dynamic provisioning for Metrics & Prometheus
+openshift_master_dynamic_provisioning_enabled: true
+#

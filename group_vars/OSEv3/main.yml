@@ -1,0 +1,75 @@
+# SSH user, this user should allow ssh based auth without requiring a
+# password. If using ssh key based auth, then the key should be managed by an
+# ssh agent.
+
+ansible_user: openshift
+
+# If ansible_user is not root, ansible_become must be set to true and the
+# user must be configured for passwordless sudo
+ansible_become: yes
+
+#
+# Debug level for all OpenShift components (Defaults to 2)
+debug_level: 2
+
+#
+# Set master debug level to 4 to record logins.
+openshift_master_debug_level: 2
+
+#
+# Set deployment type to deploy enterprise as opposed to origin or a stand-alone registry
+openshift_deployment_type: openshift-enterprise
+
+#
+# Deploy OpenShift 3.11
+openshift_release: 3.11
+
+#
+# Specific version of openshift software. Used in pull docker images in tasks/docker-conf.yml
+openshift_pkg_version: -3.11.69
+
+#
+# This enables all the system containers except for docker:
+openshift_use_system_containers: true
+
+#
+# Containerized OpenShift Container Platform services are run on all target 
+# master and node hosts in the cluster instead.
+# If set to false or unset, the default RPM method is used.
+containerized: false
+
+#
+# Install OpenShift examples by default
+openshift_install_examples: true
+
+#
+# By default pods run on appnodes
+#osm_default_node_selector: 'region=primary'
+osm_default_node_selector: 'node-role.kubernetes.io/compute=true'
+
+#
+# Node defaults
+#openshift_node_kubelet_args:
+#  image-gc-high-threshold: ['80']
+#  image-gc-low-threshold: ['70']
+
+#
+# DNSMASQ is Mandatory in OCP >= 3.6
+openshift_use_dnsmasq: true
+
+#
+# FIREWALLD is now de-facto instead of iptables
+os_firewall_use_firewalld: true
+
+# Enable cockpit
+osm_use_cockpit: true
+
+# Set cockpit plugins
+osm_cockpit_plugins: ['cockpit-kubernetes']
+
+#
+# Disable OpenShift checks
+openshift_disable_check: disk_availability,package_availability,package_version,package_update,memory_availability,docker_image_availability,docker_storage
+
+# Allow NFS for Logging
+#openshift_enable_unsupported_configurations: true

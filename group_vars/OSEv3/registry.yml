@@ -1,0 +1,22 @@
+# An OpenShift registry will be created during install if there are
+# nodes present with labels matching the default registry selector,
+# "region=infra". Set openshift_node_labels per node as needed in
+# order to label nodes.
+openshift_hosted_registry_selector: 'node-role.kubernetes.io/infra=true'
+
+# Unless specified, openshift-ansible will calculate the replica count
+# based on the number of nodes matching the openshift registry selector.
+openshift_hosted_registry_replicas: 1
+
+# Force secure registry, this also causes ansible to expose the registry and
+# deploy the registry console.
+openshift_hosted_docker_registry_insecure_default: false
+
+# Registry Console Images
+openshift_cockpit_deployer_image: v3.11
+
+# Manage the OpenShift Registry (optional)
+openshift_hosted_manage_registry: true
+
+# Manage the OpenShift Registry Console (optional)
+openshift_hosted_manage_registry_console: true

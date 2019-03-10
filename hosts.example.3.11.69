@@ -1,0 +1,61 @@
+[OSEv3:vars]
+# This variable configures the subnet in which services will be created within
+# the OpenShift Origin SDN. This network block should be private and must
+# not conflict with any existing network blocks in your infrastructure to
+# which pods, nodes, or the master may require access to, or the installation
+# will fail. Defaults to 172.30.0.0/16, and cannot be re-configured after
+# deployment.
+openshift_portal_net=172.30.32.0/19
+
+
+
+# This variable overrides the SDN cluster network CIDR block. This is
+# the network from which pod IPs are assigned. This network block should
+# be a private block and must not conflict with existing network blocks
+# in your infrastructure to which pods, nodes, or the master may require
+# access.
+osm_cluster_network_cidr=172.30.0.0/19
+
+
+# DNS related entries that differ for each cluster
+openshift_master_default_subdomain=apps.example.org
+openshift_master_cluster_hostname=master.example.org
+openshift_master_cluster_public_hostname=master-internal.example.org
+
+# Allocatable System Resources per OCP group
+master_memory=512Mb
+appnode_memory=512Mb
+infranode_memory=512Mb
+ansible_user=openshift
+
+# Create an OSEv3 group that contains all the main groups
+[OSEv3:children]
+masters
+nodes
+infras
+etcd
+#glusterfs
+
+# Each master node should also be configured for etcd
+[etcd:children]
+masters
+
+[nodes:children]
+masters
+appnodes
+infras
+
+[masters]
+master1 openshift_node_group_name="node-config-master"
+master2 openshift_node_group_name="node-config-master"
+master3 openshift_node_group_name="node-config-master"
+
+[appnodes]
+appnode1 openshift_node_group_name="node-config-compute"
+appnode2 openshift_node_group_name="node-config-compute"
+appnode3 openshift_node_group_name="node-config-compute"
+
+[infras]
+infranode1 openshift_node_group_name="node-config-infra"
+infranode2 openshift_node_group_name="node-config-infra"
+infranode3 openshift_node_group_name="node-config-infra"

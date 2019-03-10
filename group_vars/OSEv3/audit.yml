@@ -1,0 +1,10 @@
+# Audit provides a security-relevant chronological set of records
+# documenting the sequence of activities that have affected system by
+# individual users, administrators, or other components of the system.
+
+openshift_master_audit_config:
+  auditFilePath: "/var/log/origin/master-audit-ocp.log"
+  enabled: true
+  maximumFileRetentionDays: 30
+  maximumFileSizeMegabytes: 500
+  maximumRetainedFiles: 2

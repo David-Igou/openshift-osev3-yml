@@ -1,0 +1,12 @@
+# Router will only be created if nodes matching this label are present.
+openshift_hosted_router_selector: 'node-role.kubernetes.io/infra=true'
+
+# Unless specified, openshift-ansible will calculate the replica count
+# based on the number of nodes matching the openshift router selector.
+openshift_hosted_router_replicas: 3
+
+# Router wildcard certificate. These files must be present on the utility node
+# prior to OpenShift ansible configuration. 
+ openshift_hosted_router_certificate: {"certfile": "path/to/cert.cer", "keyfile": "path/to/keys.key", "cafile": "path/to/ca.cer"}
+
+

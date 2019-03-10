@@ -1,0 +1,13 @@
+# Cluster monitoring
+
+# Cluster monitoring is enabled by default, disable it by setting
+openshift_cluster_monitoring_operator_install: true
+
+# Cluster monitoring configuration variables allow setting the amount of
+# storage requested through PersistentVolumeClaims.
+openshift_cluster_monitoring_operator_prometheus_storage_capacity: "50Gi"
+openshift_cluster_monitoring_operator_alertmanager_storage_capacity: "2Gi"
+openshift_cluster_monitoring_operator_prometheus_storage_enabled: true
+openshift_cluster_monitoring_operator_alertmanager_storage_enabled: true
+openshift_cluster_monitoring_operator_prometheus_storage_class_name: emptyDir
+openshift_cluster_monitoring_operator_alertmanager_storage_class_name: emptyDir
